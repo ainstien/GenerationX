@@ -205,4 +205,4 @@ Ensure the entire output is a single JSON object. Do not include any text before
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
