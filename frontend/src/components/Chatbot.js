@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'; // Added useEffect, useRef
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+
 function Chatbot() {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
@@ -19,7 +21,7 @@ function Chatbot() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5001/api/chat', {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessageEntry.text }),

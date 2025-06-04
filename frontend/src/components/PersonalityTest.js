@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PersonalityAnalysisDisplay from './PersonalityAnalysisDisplay';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+
 function PersonalityTest() {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -19,7 +21,7 @@ function PersonalityTest() {
   const fetchInitialQuestions = async () => {
     resetTestState();
     try {
-      const response = await fetch('http://localhost:5001/api/personality-questions');
+      const response = await fetch(`${API_BASE_URL}/api/personality-questions`);
       const data = await response.json();
       if (!response.ok) {
         setIsAiOffline(response.status === 503 || (data.error && data.error.includes('offline')));
@@ -59,7 +61,7 @@ function PersonalityTest() {
     }
     setIsSubmitting(true); setError('');
     try {
-      const response = await fetch('http://localhost:5001/api/personality-analysis', {
+      const response = await fetch(`${API_BASE_URL}/api/personality-analysis`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ answers: selectedAnswers }),
       });
