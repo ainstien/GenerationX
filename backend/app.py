@@ -204,4 +204,5 @@ Ensure the entire output is a single JSON object. Do not include any text before
         return jsonify({'error': 'Ainstien is having trouble analyzing results. Please try again.'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
+    port = int(os.environ.get('PORT', 10000))
+    app.run(debug=True, host='0.0.0.0', port=port)
